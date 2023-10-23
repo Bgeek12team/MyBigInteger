@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Numerics;
+using Microsoft.VisualBasic;
 
 namespace DividersProject.Tests
 {
@@ -15,8 +16,8 @@ namespace DividersProject.Tests
         [TestMethod()]
         public void IsDividerSimpleTest()
         {
-            int n = 10;
-            int d = 2;
+            MyBigInteger n = new MyBigInteger(10);
+            MyBigInteger d = new MyBigInteger(2);
 
             bool res = Dividers.IsDivider(n, d);
 
@@ -26,10 +27,10 @@ namespace DividersProject.Tests
         [TestMethod]
         public void AllDividers_N_Plus()
         {
-            int n = 24;
-
+            MyBigInteger n =  new MyBigInteger(24);
+           
             BigInteger[] expectedDividers = { 1, 2, 3, 4, 6, 8, 12, 24 };
-            BigInteger[] dividers = Dividers.AllDividers(n);
+            MyBigInteger[] dividers = Dividers.AllDividers(n);
             Array.Sort(dividers);
 
             CollectionAssert.AreEqual(expectedDividers, dividers);
@@ -38,11 +39,11 @@ namespace DividersProject.Tests
         [TestMethod]
         public void AllDividers_Zero()
         {
-            int n = 0;
+            MyBigInteger n  = new MyBigInteger(0);
             long[] expectedDividers = { };
             long[] expectedPowers = { };
-
-            BigInteger[] dividers = Dividers.AllDividers(n);
+            
+            MyBigInteger[] dividers = Dividers.AllDividers(n);
 
             CollectionAssert.AreEqual(expectedDividers, dividers);
         }
@@ -50,11 +51,11 @@ namespace DividersProject.Tests
         [TestMethod]
         public void AllDividers_N_Minus()
         {
-            int n = -10;
+            MyBigInteger n = new MyBigInteger(-10);
             long[] expectedDividers = { };
             long[] expectedPowers = { };
 
-            BigInteger[] dividers = Dividers.AllDividers(n);
+            MyBigInteger[] dividers = Dividers.AllDividers(n);
 
             CollectionAssert.AreEqual(expectedDividers, dividers);
         }
@@ -62,7 +63,7 @@ namespace DividersProject.Tests
         [TestMethod()]
         public void IsPrimeTest_True()
         {
-            int prime = 17;
+            MyBigInteger prime =new MyBigInteger(17);
 
             bool result = Dividers.IsPrime(prime);
             Assert.IsTrue(result);
@@ -71,7 +72,7 @@ namespace DividersProject.Tests
         [TestMethod()]
         public void IsPrimeTest_False()
         {
-            int prime = 24;
+            MyBigInteger prime = new MyBigInteger(24);
 
             bool result = Dividers.IsPrime(prime);
             Assert.IsFalse(result);
@@ -79,7 +80,7 @@ namespace DividersProject.Tests
         [TestMethod()]
         public void IsPrimeTest_Minus()
         {
-            int prime = -17;
+            MyBigInteger prime = new MyBigInteger(-17);
             try
             {
                 bool result = Dividers.IsPrime(prime);
@@ -92,7 +93,7 @@ namespace DividersProject.Tests
         [TestMethod()]
         public void IsPrimeTest_Zero()
         {
-            int prime = 0;
+            MyBigInteger prime = new MyBigInteger(0);
 
             try
             {
@@ -105,7 +106,7 @@ namespace DividersProject.Tests
         [TestMethod()]
         public void IsPrimeTest_One()
         {
-            int prime = 1;
+            MyBigInteger prime = new MyBigInteger(1);
 
             bool result = Dividers.IsPrime(prime);
             Assert.IsFalse(result);
@@ -114,10 +115,10 @@ namespace DividersProject.Tests
         [TestMethod]
         public void AllPrimes_revers()
         {
-            int start = 20;
-            int end = 10;
+            MyBigInteger start = new MyBigInteger(20);
+            MyBigInteger end = new MyBigInteger(10);
 
-            long[] result = Dividers.AllPrimes(start, end);
+            MyBigInteger[] result = Dividers.AllPrimes(start, end);
 
             CollectionAssert.AreEqual(new long[] { }, result);
         }
@@ -125,11 +126,11 @@ namespace DividersProject.Tests
         [TestMethod]
         public void AllPrimes()
         {
-            int start = 10;
-            int end = 30;
+            MyBigInteger start = new MyBigInteger(10);
+            MyBigInteger end = new MyBigInteger(30);
             long[] expectedPrimes = { 11, 13, 17, 19, 23, 29 };
 
-            long[] result = Dividers.AllPrimes(start, end);
+            MyBigInteger[] result = Dividers.AllPrimes(start, end);
 
             CollectionAssert.AreEqual(expectedPrimes, result);
         }
@@ -137,10 +138,10 @@ namespace DividersProject.Tests
         [TestMethod]
         public void AllPrimes_Minus()
         {
-            int start = -10;
-            int end = -1;
+            MyBigInteger start = new MyBigInteger(-10);
+            MyBigInteger end = new MyBigInteger(-1);
 
-            long[] result = Dividers.AllPrimes(start, end);
+            MyBigInteger[] result = Dividers.AllPrimes(start, end);
 
             CollectionAssert.AreEqual(new long[] { }, result);
         }
@@ -148,10 +149,10 @@ namespace DividersProject.Tests
         [TestMethod]
         public void AllPrimes_One()
         {
-            int start = 7;
-            int end = 7;
+            MyBigInteger start = new MyBigInteger(7);
+            MyBigInteger end = new MyBigInteger(7);
 
-            long[] result = Dividers.AllPrimes(start, end);
+            MyBigInteger[] result = Dividers.AllPrimes(start, end);
 
             CollectionAssert.AreEqual(new long[] {7}, result);
         }
@@ -159,11 +160,11 @@ namespace DividersProject.Tests
         [TestMethod]
         public void Factoring_Plus()
         {
-            int n = 24;
+            MyBigInteger n = new MyBigInteger(24);
             long[] expectedFactors = { 2, 3 };
             long[] expectedPowers = { 3, 1 };
 
-            (long[] factors, long[] powers) = Dividers.Factorize(n);
+            (MyBigInteger[] factors, MyBigInteger[] powers) = Dividers.Factorize(n);
 
             CollectionAssert.AreEqual(expectedFactors, factors);
             CollectionAssert.AreEqual(expectedPowers, powers);
@@ -172,10 +173,10 @@ namespace DividersProject.Tests
         [TestMethod]
         public void Factoring_Zero()
         {
-            int n = 0;
+            MyBigInteger n = new MyBigInteger(0);
             try
             {
-                (long[] factors, long[] powers) = Dividers.Factorize(n);
+                (MyBigInteger[] factors, MyBigInteger[] powers) = Dividers.Factorize(n);
             } catch (Exception e)
             {
                 Assert.IsTrue(true);
@@ -185,10 +186,10 @@ namespace DividersProject.Tests
         [TestMethod]
         public void Factoring_Minus()
         {
-            int n = -10;
+            MyBigInteger n = new MyBigInteger(-10);
             try
             {
-                (long[] factors, long[] powers) = Dividers.Factorize(n);
+                (MyBigInteger[] factors, MyBigInteger[] powers) = Dividers.Factorize(n);
             } catch(Exception e)
             {
                 Assert.IsTrue(true);
@@ -199,11 +200,11 @@ namespace DividersProject.Tests
         [TestMethod]
         public void Factoring_ForOne()
         {
-            int n = 1;
+            MyBigInteger n = new MyBigInteger(1);
             int[] expectedFactors = { };
             int[] expectedPowers = { };
 
-            (long[] factors, long[] powers) = Dividers.Factorize(n);
+            (MyBigInteger[] factors, MyBigInteger[] powers) = Dividers.Factorize(n);
 
             CollectionAssert.AreEqual(expectedFactors, factors);
             CollectionAssert.AreEqual(expectedPowers, powers);
@@ -211,8 +212,12 @@ namespace DividersProject.Tests
 
         [TestMethod()]
         public void FindNumsWithDividersTest()
-        {
-            long[] allNums = Dividers.FindNumsWithDividers(3, 1, 100);
+        {   
+            MyBigInteger first = new MyBigInteger(3);
+            MyBigInteger second = new MyBigInteger(1);
+            MyBigInteger third = new MyBigInteger(100);
+
+            MyBigInteger[] allNums = Dividers.FindNumsWithDividers(first, second, third);
             long[] expectedNums = { 16, 81 };
             CollectionAssert.AreEqual(allNums, expectedNums);
         }
